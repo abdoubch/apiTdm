@@ -7,6 +7,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const restaurantRoutes = require('./routes/restaurantRoutes');
 const mealRoutes = require("./routes/mealRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const authRoutes = require("./routes/authRoutes");
 const { authenticateUser } = require('./middleware/authMiddleware'); 
 const cors = require('cors');
 const morgan = require('morgan');
@@ -27,18 +28,18 @@ db.on('error',(error)=>console.log(error))
 db.once('open',()=>console.log("Connected to DB"))
 app.use('/api/users', userRoutes);
 
-
 app.use('/api/orders', orderRoutes);
 
-
 app.use('/api/restaurants', restaurantRoutes);
-
 
 app.use('/api/reviews', reviewRoutes);
 
 app.use("/api/meal", mealRoutes);
 
 app.use("/api/cart", cartRoutes);
+
+app.use("/api/auth", authRoutes);
+
 
 app.use((req, res, next) => {
   res.status(404).json({ message: 'Route not found' });
