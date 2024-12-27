@@ -5,7 +5,7 @@ const userRoutes = require('./routes/userRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const restaurantRoutes = require('./routes/restaurantRoutes');
-
+const userController = require("./controllers/userController");
 const { authenticateUser } = require('./middleware/authMiddleware'); 
 const cors = require('cors');
 const morgan = require('morgan');
@@ -20,11 +20,10 @@ app.use(cors());
 app.use(morgan('dev')); 
 
 
-// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(() => console.log('MongoDB connected'))
-//   .catch((err) => console.log('MongoDB connection error:', err));
-
-
+mongoose.connect(process.env.MONGODB_URI)
+const db = mongoose.connection
+db.on('error',(error)=>console.log(error))
+db.once('open',()=>console.log("Connected"))
 app.use('/api/users', userRoutes);
 
 
@@ -39,7 +38,6 @@ app.use('/api/reviews', reviewRoutes);
 app.use((req, res, next) => {
   res.status(404).json({ message: 'Route not found' });
 });
-
 
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message || 'Internal Server Error' });

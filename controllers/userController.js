@@ -1,7 +1,21 @@
 const User = require('../models/User');
 
-// Create a new user
 
+
+
+
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({ success: true, users });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to fetch users", error });
+  }
+};
+// Create a new user
 
 exports.createUser = async (req, res) => {
     const { name, email, phone, address, password, profilePicture, googleId } = req.body;
