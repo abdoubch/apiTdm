@@ -22,7 +22,7 @@ app.use(cors());
 app.use(morgan('dev')); 
 
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect("mongodb://localhost:27017/tdm");
 const db = mongoose.connection
 db.on('error',(error)=>console.log(error))
 db.once('open',()=>console.log("Connected to DB"))
