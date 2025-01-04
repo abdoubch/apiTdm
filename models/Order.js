@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema({
   deliveryNotes: { type: String },
   status: {
     type: String,
-    enum: ['Pending', 'Preparing', 'Picked Up', 'On the Way', 'Delivered'],
+    enum: ['Pending', 'Preparing', 'Picked_Up', 'On_the_Way', 'Delivered', 'Canceled'],
     default: 'Pending',
   },
   tracking: {
