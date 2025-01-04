@@ -5,6 +5,7 @@ const router = express.Router();
 // Restaurant routes
 router.post('/', restaurantController.createRestaurant); // Create a restaurant
 router.get('/:id', restaurantController.getRestaurantById); // Get restaurant by ID
+router.get('/', restaurantController.getAllRestaurants); //Get all restaurants
 router.put('/:id', restaurantController.updateRestaurant); // Update restaurant by ID
 router.delete('/:id', restaurantController.deleteRestaurant); // Delete restaurant by ID
 module.exports = router;
