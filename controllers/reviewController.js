@@ -16,7 +16,7 @@ exports.createReview = async (req, res) => {
 exports.getReviewsByRestaurant = async (req, res) => {
   try {
     const reviews = await Review.find({ restaurant: req.params.restaurantId }).populate('user');
-    res.status(200).json({ success: true, reviews });
+    res.status(200).json(reviews);
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to fetch reviews', error });
   }

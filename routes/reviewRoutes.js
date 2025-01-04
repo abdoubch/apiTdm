@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Review routes
 router.post('/', reviewController.createReview); // Create a review
-router.get('/restaurant/:restaurantId', reviewController.getReviewsByRestaurant); // Get reviews by restaurant ID
+router.get('/:restaurantId', reviewController.getReviewsByRestaurant); // Get reviews by restaurant ID
 router.delete('/:id', reviewController.deleteReview); // Delete review by ID
 
 module.exports = router;

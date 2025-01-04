@@ -1,5 +1,31 @@
 const Meal = require("../models/meal");
 
+
+
+exports.getFiveRandomMeals = async (req, res) => {
+  try {
+    const meals = await Meal.aggregate([{ $sample: { size: 5 } }]);
+    res.status(200).json(meals);
+  } catch (error) {
+    res.status(500).json({ error: "Erreur lors de la récupération des repas" });
+  }
+};
+
+
+exports.getMealById = async (req, res) => {
+  try {
+    const { mealId } = req.params;
+    const meal = await Meal.findById(mealId); // Utilisation de Mongoose
+    if (!meal) {
+      return res.status(404).json({ message: "Repas non trouvé" });
+    }
+    res.status(200).json(meal);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur serveur", error });
+  }
+};
+
+
 // Obtenir tous les repas pour un restaurant
 exports.getMealsByRestaurant = async (req, res) => {
   try {
@@ -12,9 +38,14 @@ exports.getMealsByRestaurant = async (req, res) => {
 
 // Créer un nouveau repas pour un restaurant
 exports.createMeal = async (req, res) => {
+  const {name,description,details,logo,price} =  req.body
   try {
     const meal = new Meal({
-      ...req.body,
+      name,
+      description,
+      details,
+      logo,
+      price,
       restaurant: req.params.restaurantId,
     });
     await meal.save();
