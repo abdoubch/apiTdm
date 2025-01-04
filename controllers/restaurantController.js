@@ -19,9 +19,19 @@ exports.getRestaurantById = async (req, res) => {
     if (!restaurant) {
       return res.status(404).json({ success: false, message: 'Restaurant not found' });
     }
-    res.status(200).json({ success: true, restaurant });
+    res.status(200).json(restaurant);
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to fetch restaurant', error });
+  }
+};
+
+// Get all restaurants
+exports.getAllRestaurants = async (req, res) => {
+  try {
+    const restaurants = await Restaurant.find(); // Fetch all restaurants from the database
+    res.status(200).json({ success: true, restaurants });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Failed to fetch restaurants', error });
   }
 };
 
@@ -50,3 +60,4 @@ exports.deleteRestaurant = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to delete restaurant', error });
   }
 };
+
