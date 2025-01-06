@@ -15,7 +15,7 @@ const login = async (req, res) => {
       expiresIn: "24h",
     });
 
-    res.json({ token });
+    res.json({ token, id:user._id ,message:"success"});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -41,7 +41,7 @@ const register = async (req, res) => {
       expiresIn: "24h",
     });
 
-    res.status(201).json({ token });
+    res.status(201).json({ token,id:user._id,message:"success" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

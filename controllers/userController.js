@@ -35,7 +35,7 @@ exports.createUser = async (req, res) => {
       if (!user) {
         return res.status(404).json({ success: false, message: 'User not found' });
       }
-      res.status(200).json({ success: true, user });
+      res.status(200).json(user);
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch user', error });
     }
@@ -48,7 +48,7 @@ exports.createUser = async (req, res) => {
       if (!updatedUser) {
         return res.status(404).json({ success: false, message: 'User not found' });
       }
-      res.status(200).json({ success: true, user: updatedUser });
+      res.status(200).json(updatedUser);
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to update user', error });
     }

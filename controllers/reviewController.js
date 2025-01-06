@@ -6,7 +6,7 @@ exports.createReview = async (req, res) => {
   try {
     const newReview = new Review({ user, restaurant, rating, comment });
     await newReview.save();
-    res.status(201).json({ success: true, review: newReview });
+    res.status(201).json(newReview);
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to create review', error });
   }
