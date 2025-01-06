@@ -1,4 +1,4 @@
-const Order = require('../models/Order');
+const Order = require('../models/Order')
 
 // Create a new order
 exports.createOrder = async (req, res) => {
@@ -65,9 +65,9 @@ exports.deleteOrder = async (req, res) => {
 // Get all orders for a specific user
 exports.getOrdersByUserId = async (req, res) => {
   try {
-    const userId = req.params.userId; 
+    const id = req.params.id; 
 
-    const orders = await Order.find({ User: userId }); 
+    const orders = await Order.find({ user: id }); 
 
     if (!orders || orders.length === 0) {
       return res.status(404).json({ message: "No orders found for this user" });
