@@ -76,3 +76,16 @@ exports.deleteMeal = async (req, res) => {
     res.status(500).json({ error: "Erreur lors de la suppression du repas" });
   }
 };
+
+// Get Meal By ID 
+exports.getMealById = async (req, res) => {
+  try {
+      const meal = await Meal.findById(req.params.mealId)
+      if (!meal) {
+        return res.status(404).json({ success: false, message: 'Meal not found' });
+      }
+      res.status(200).json(meal);
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch meal', error });
+    }
+};
