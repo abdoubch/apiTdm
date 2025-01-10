@@ -39,15 +39,7 @@ exports.getRestaurantById = async (req, res) => {
   }
 };
 
-// Get all restaurants
-exports.getAllRestaurants = async (req, res) => {
-  try {
-    const restaurants = await Restaurant.find(); // Fetch all restaurants from the database
-    res.status(200).json({ success: true, restaurants });
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Failed to fetch restaurants', error });
-  }
-};
+
 
 // Update restaurant info
 exports.updateRestaurant = async (req, res) => {
